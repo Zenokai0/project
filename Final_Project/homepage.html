@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zando - Fashion Retail</title>
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/homepage.css">
+    <link rel="stylesheet" href="styles/footer.css">
+</head>
+
+<body>
+    <header>
+        <button class="hamburger">☰</button>
+        <nav class="nav-menu">
+            <div class="menu-left">
+                <a href="#home">Home</a>
+                <div class="dropdown">
+                    <!-- <a href="#">Men</a> -->
+                    <p>Men</p>
+                    <div class="dropdown-content men">
+                        <a href="#men-shoes">Shoes</a>
+                        <a href="#men-shirts">Shirts</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <p>Women</p>
+                    <div class="dropdown-content women">
+                        <a href="#women-shoes">Shoes</a>
+                        <a href="#women-shirts">Shirts</a>
+                        <a href="#women-jeans">Jeans</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <p>Accessories</p>
+                    <div class="dropdown-content accessories">
+                        <a href="#necklaces">Necklaces</a>
+                        <a href="#rings">Rings</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="logo">
+            <h1><a href="homepage.html">ONES</a></h1>
+        </div>
+        <div class="menu-right">
+            <input type="search" placeholder="Search..." class="search-bar">
+            <button title="Add to Bag" class="cart menu-right-btn" data-count="0">🛍️</button>
+            <a href="#account" title="User Account" class="account-btn">👤</a>
+            <div class="account-menu">
+                <button title="Notifications">🔔</button>
+                <button title="Add to Bag" class="cart" data-count="0">🛍️</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="carousel">
+            <div class="carousel-slide" style="background-image: url('images/Banner-1.jpg');"></div>
+            <div class="carousel-slide" style="background-image: url('images/banner2.jpg'); "></div>
+            <div class="carousel-slide" style="background-image: url('images/banner3.jpg');"></div>
+        </div>
+        <button class="carousel-prev">❮</button>
+        <button class="carousel-next">❯</button>
+        <div class="carousel-dots">
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+        </div>
+        <div class="hero-content">
+            <button>Shop Now</button>
+        </div>
+    </section>
+
+    <h2 class="section-title">Explore Categories</h2>
+    <section class="categories">
+        <div class="category-card" style="background-image: url('images/f1.jpg');">
+            <div class="category-text">Zando</div>
+            <div class="category-style">Life Style</div>
+        </div>
+        <div class="category-card" style="background-image: url('images/f2.jpg');">
+            <div class="category-text">Ten11</div>
+            <div class="category-style">Sport Life</div>
+        </div>
+        <div class="category-card" style="background-image: url('images/f3.jpg');">
+            <div class="category-text">Gatoni</div>
+            <div class="category-style">Smart Casual</div>
+        </div>
+        <div class="category-card" style="background-image: url('images/f4.jpg');">
+            <div class="category-text">Routine</div>
+            <div class="category-style">Life Style</div>
+        </div>
+    </section>
+
+    <section class="promo-banner">
+        <div class="promo-content">
+            <h2>Up to 50% Off - Limited Time Only!</h2>
+            <button>Shop Sale</button>
+        </div>
+    </section>
+    <!-- change product here base on a tag -->
+    <section class="products req-product">
+        <!-- req product will show here -->
+    </section>
+
+    <!-- featured products -->
+    <h2 class="section-title">Featured Products</h2>
+    <section class="products">
+        <div class="product-card"
+            onclick="openProduct(1, 'Men\'s Casual Shirt', '$29.99', 'Images/IMG_0137.jpg', ['Images/IMG_0137.jpg', 'Images/Sneaker3.jpg', 'Images/Sneaker4.jpg'])">
+            <img src="Images/IMG_0137.jpg" alt="Men's Casual Shirt">
+            <h3>Men's Casual Shirt</h3>
+            <p>$29.99</p>
+        </div>
+        <div class="product-card"
+            onclick="openProduct(2, 'Women\'s Dress', '$39.99', 'Images/Sneaker2.jpg', ['Images/Sneaker2.jpg', 'Images/Sneaker3.jpg', 'Images/Sneaker6.jpg'])">
+            <img src="Images/Sneaker2.jpg" alt="Women's Dress">
+            <h3>Women's Dress</h3>
+            <p>$39.99</p>
+        </div>
+        <div class="product-card"
+            onclick="openProduct(3, 'Leather Bag', '$49.99', 'Images/Sneaker3.jpg', ['Images/Sneaker3.jpg', 'Images/Sneaker4.jpg', 'Images/Sneaker5.jpg'])">
+            <img src="Images/Sneaker3.jpg" alt="Leather Bag">
+            <h3>Leather Bag</h3>
+            <p>$49.99</p>
+        </div>
+        <div class="product-card"
+            onclick="openProduct(4, 'Sneakers', '$59.99', 'Images/Sneaker6.jpg', ['Images/Sneaker6.jpg', 'Images/Sneaker5.jpg', 'Images/Sneaker7.jpg'])">
+            <img src="Images/Sneaker6.jpg" alt="Sneakers">
+            <h3>Sneakers</h3>
+            <p>$59.99</p>
+        </div>
+    </section>
+
+    <!-- <a href="chat.html" class="chat-button">👋 Chat with us</a> -->
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>About Zando</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                    <li><a href="#terms">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Shop Categories</h4>
+                <ul>
+                    <li><a href="#men">Men</a></li>
+                    <li><a href="#women">Women</a></li>
+                    <li><a href="#accessories">Accessories</a></li>
+                    <li><a href="#sale">Sale</a></li>
+                </ul>
+            </div>
+            <div class="footer-column social">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="#facebook">📘</a></li>
+                    <li><a href="#instagram">📷</a></li>
+                    <li><a href="#twitter">🐦</a></li>
+                    <li><a href="#pinterest">📌</a></li>
+                </ul>
+            </div>
+            <div class="footer-column newsletter">
+                <h4>Newsletter</h4>
+                <p>Stay updated with our latest trends!</p>
+                <form>
+                    <input type="email" placeholder="Enter your email">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Zando Fashion. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script src="js/homepage.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,261 @@
+/* Base styles for desktop */
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body{
+    font-family: 'Poppins';
+    background-color:#fbf0e9 ;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FBE4D6;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 1);
+    position: relative;
+    padding: 0.5rem 2rem;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #0C0950;
+}
+.logo h1 a{
+    text-decoration: none;
+}
+
+.menu-left {
+    display: flex;
+    align-items: center;
+}
+
+.menu-left a, .menu-left p, .dropdown > a {
+    margin-right: 20px;
+    text-decoration: none;
+    color: #0C0950;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    /* letter-spacing: 1px; */
+    transition: color 0.3s ease;
+}
+
+.menu-left a:hover, .menu-left p:hover, .dropdown > a:hover {
+    color: #0C0950;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #FBE4D6;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 4px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    transition: ease-in-out 300ms;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.dropdown-content a:hover {
+    text-decoration: underline;
+    transition:ease-in-out 200ms;
+}
+
+.menu-right {
+    display: flex;
+    align-items: center;
+}
+
+.menu-right input.search-bar {
+    padding: 5px 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.menu-right button, .menu-right a {
+    margin-left: 15px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.menu-right button:hover, .menu-right a:hover {
+    color: #007bff;
+}
+
+.cart {
+    position: relative;
+}
+
+.cart[data-count]:not([data-count="1"])::after {
+    content: attr(data-count);
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ff0000;
+    color: #fff;
+    font-size: 12px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hamburger and nav styles */
+.hamburger {
+    display: none;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #0C0950;
+}
+
+.nav-menu {
+    transition: transform 0.3s ease-in-out;
+}
+
+.account-menu {
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 60px;
+    background-color:#fbf0e9 ;
+    padding: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    z-index: 1;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* iPad size (max-width: 768px) */
+@media screen and (max-width: 768px) {
+    .hamburger {
+        display: block;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        left: -400px;
+        width: 30%;
+        height: 100vh;
+        background-color: #FBE4D6;
+        padding: 20px;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-menu.active {
+        transform: translateX(400px);
+    }
+
+    .menu-left {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .menu-left a, .dropdown > a {
+        margin: 10px 0;
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
+
+    .dropdown-content {
+        position: static;
+        box-shadow: none;
+        padding-left: 0;
+        background-color: #eac8b3;
+        display: none;
+
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: none;
+    }
+
+    .dropdown.active .dropdown-content {
+        display: block;
+    }
+
+    .dropdown-content a {
+        padding: 8px 15px;
+        font-size: 16px;
+        color: #418ad8;
+    }
+    .menu-right .menu-right-btn {
+        display: none;
+    }
+
+    .menu-right .search-bars {
+        display: none;
+    }
+}
+
+/* Phone size (max-width: 480px) */
+@media screen and (max-width: 480px) {
+    .menu-right .menu-right-btn {
+        display: none;
+    }
+
+    .menu-right .search-bar,
+    .menu-right .account-btn {
+        display: none;
+    }
+
+    .menu-right input.search-bar {
+        width: 100px;
+    }
+
+    .account-menu {
+        transform: translateX(100%);
+    }
+
+    .account-btn:hover + .account-menu,
+    .account-menu.active {
+        display: flex;
+        flex-direction: column;
+        transform: translateX(0);
+    }
+
+    .account-menu button {
+        margin: 10px 0;
+        font-size: 18px;
+    }
+
+    .logo h1 {
+        font-size: 20px;
+    }
+}
