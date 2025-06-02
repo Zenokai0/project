@@ -1,5 +1,6 @@
 /* Hero (Carousel) Section */
 .hero {
+    margin-top: 65px;
     position: relative;
     height: 600px;
     overflow: hidden;

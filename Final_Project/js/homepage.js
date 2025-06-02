@@ -57,19 +57,40 @@ document.querySelectorAll('.quick-view').forEach(button => {
 });
 
 function openProduct(id, name, price, image, thumbnails = []) {
-    console.log('open')
     const product = { id, name, price, image, thumbnails };
     localStorage.setItem('selectedProduct', JSON.stringify(product));
     window.location.href = 'product.html';
 };
 
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
     const dropdowns = document.querySelectorAll('.dropdown');
     const accountBtn = document.querySelector('.account-btn');
     const accountMenu = document.querySelector('.account-menu');
+
+    //check if its redirect from products page which will have a hash of #category-subcategory
+    if (window.location.hash.includes('-')) {
+        const hash = window.location.hash.slice(1).split('-');
+        const category = hash[0]
+        const subcategory = hash[1];
+
+        let html = '';
+
+        const response = await fetch(`http://localhost:3000/${category}/${subcategory}`)
+        const data = await response.json();
+        data.forEach((d, i) =>
+            html += `
+                <div class="product-card"
+                    onclick="getDetail(${d.product_id})">
+                    <img src="Images/${d.product_image}.jpg" alt="${d.product_image}">
+                    <h3>${d.product_name}</h3>
+                    <p>${d.price}</p>
+                </div>`);
+
+        document.querySelector('.req-product').innerHTML = html;
+    }
 
     // Hamburger menu toggle
     if (hamburger && navMenu) {
@@ -112,8 +133,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
 //testing db
+function getDetail(product_id) {
+    localStorage.setItem('selectedProductId', product_id);
+    window.location.href = 'product.html';
+}
 document.querySelector('.men').addEventListener('click', async (e) => {
     let html = '';
 
@@ -122,7 +146,7 @@ document.querySelector('.men').addEventListener('click', async (e) => {
     data.forEach((d, i) =>
         html += `
                 <div class="product-card"
-                    onclick="openProduct(${i}, "${d.product_name}", '${d.price}', '/images/${d.product_image}.jpg', ['${d.product_image}'])">
+                    onclick="getDetail(${d.product_id})">
                     <img src="Images/${d.product_image}.jpg" alt="${d.product_image}">
                     <h3>${d.product_name}</h3>
                     <p>${d.price}</p>
@@ -131,6 +155,8 @@ document.querySelector('.men').addEventListener('click', async (e) => {
     document.querySelector('.req-product').innerHTML = html;
 })
 document.querySelector('.women').addEventListener('click', async (e) => {
+    console.log(e);
+    console.log()
     let html = '';
 
     const response = await fetch(`http://localhost:3000/women/${e.target.innerHTML}`)
@@ -140,7 +166,7 @@ document.querySelector('.women').addEventListener('click', async (e) => {
         console.log(product_name)
         html += `
                 <div class="product-card"
-                    onclick="openProduct(${i}, ${product_name}, ${JSON.stringify(d.price)}, '/images/${d.product_image}.jpg', [${JSON.stringify(d.product_image)}])">
+                    onclick="getDetail(${d.product_id})">    
                     <img src="Images/${d.product_image}.jpg" alt="${d.product_image}">
                     <h3>${d.product_name}</h3>
                     <p>${d.price}</p>
@@ -156,10 +182,11 @@ document.querySelector('.accessories').addEventListener('click', async (e) => {
     data.forEach((d, i) =>
         html += `
                 <div class="product-card"
-                    onclick="openProduct(${i}, "${d.product_name}", '${d.price}', '/images/${d.product_image}.jpg', ['${d.product_image}'])">
+                    onclick="getDetail(${d.product_id})">
                     <img src="Images/${d.product_image}.jpg" alt="${d.product_image}">
                     <h3>${d.product_name}</h3>
                     <p>${d.price}</p>
                 </div>`);
     document.querySelector('.req-product').innerHTML = html;
 })
+

@@ -14,7 +14,8 @@ header {
     align-items: center;
     background-color: #FBE4D6;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 1);
-    position: relative;
+    position: fixed;
+    width: 100vw;
     padding: 0.5rem 2rem;
     top: 0;
     z-index: 1000;
