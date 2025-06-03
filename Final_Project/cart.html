@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cart</title>
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/cart.css">
+</head>
+
+<body>
+    <header>
+        <div class="menu-left">
+            <a href="homepage.html">Home</a>
+            <div class="dropdown">
+                <p>Men</p>
+                <div class="dropdown-content">
+                    <a href="homepage.html#men-shoes">Shoes</a>
+                    <a href="homepage.html#men-shirts">Shirts</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <p>Women</p>
+                <div class="dropdown-content">
+                    <a href="homepage.html#women-shoes">Shoes</a>
+                    <a href="homepage.html#women-shirts">Shirts</a>
+                    <a href="homepage.html#women-jeans">Jeans</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <p>Accessories</p>
+                <div class="dropdown-content">
+                    <a href="homepage.html#accessories-necklaces">Necklaces</a>
+                    <a href="homepage.html#accessories-rings">Rings</a>
+                </div>
+            </div>
+        </div>
+        <div class="logo">
+            <h1><a href="homepage.html">ONES</a></h1>
+        </div>
+        <div class="menu-right">
+            <input type="search" placeholder="Search..." class="search-bar">
+            <a href="cart.html" title="Add to Bag" class="cart menu-right-btn" data-count="0">🛍️</a>
+            <button class="login">Login</button>
+            <button class="register">Register</button>
+            <a title="User Account" class="account-btn" style="display: none;">👤</a>
+            <div class="profile-dropdown">
+                <li class="username">username</li>
+                <li class="logout">Logout</li>
+            </div>
+            
+            <div class="account-menu">
+                <button title="Notifications">🔔</button>
+                <a href="cart.html" title="Add to Bag" class="cart" data-count="0">🛍️</a>
+            </div>
+        </div>
+    </header>
+    <!-- login popup -->
+    <div class="popup-bg"></div>
+    <div class="popup">
+        <button class="close">X</button>
+        <div class="popup-nav">
+            <button class="popup-nav-button nav-login">Login</button>
+            <button class="popup-nav-button nav-reg">Register</button>
+        </div>
+        <div class="login-body">
+            <label for="username">Username</label>
+            <input type="text" id="username">
+            <label for="password">Password</label>
+            <input type="password" id="password">
+            <button class="login-submit">Login</button>
+        </div>
+        <div class="register-body">
+            <label for="regi-username">Username</label>
+            <input type="text" id="regi-username">
+            <label for="regi-password">Password</label>
+            <input type="password" id="regi-password">
+            <label for="confirm-pw">Confirm Password</label>
+            <input type="password" id="confirm-password">
+            <button class="register-submit">Register</button>
+        </div>
+    </div>
+    <main class="cart-body" style="margin-top: 65px;">
+        <!-- item in user cart will display here -->
+    </main>
+    <div class="checkout">
+        <button>checkout</button>
+    </div>
+</body>
+
+<script src="./js/cart.js"></script>
+
+</html>

@@ -38,18 +38,54 @@
             <h1><a href="homepage.html">ONES</a></h1>
         </div>
         <div class="menu-right">
-            <input type="search" placeholder="Search...">
-            <button title="Add to Bag" class="cart" data-count="0">🛍️</button>
-            <a href="#account" title="User Account">👤</a>
+            <input type="search" placeholder="Search..." class="search-bar">
+            <a href="cart.html" title="Add to Bag" class="cart menu-right-btn" data-count="0">🛍️</a>
+            <button class="login">Login</button>
+            <button class="register">Register</button>
+            <a title="User Account" class="account-btn" style="display: none;">👤</a>
+            <div class="profile-dropdown">
+                <li class="username">username</li>
+                <li class="logout">Logout</li>
+            </div>
+            
+            <div class="account-menu">
+                <button title="Notifications">🔔</button>
+                <a href="cart.html" title="Add to Bag" class="cart" data-count="0">🛍️</a>
+            </div>
         </div>
     </header>
+    <!-- login popup -->
+    <div class="popup-bg"></div>
+    <div class="popup">
+        <button class="close">X</button>
+        <div class="popup-nav">
+            <button class="popup-nav-button nav-login">Login</button>
+            <button class="popup-nav-button nav-reg">Register</button>
+        </div>
+        <div class="login-body">
+            <label for="username">Username</label>
+            <input type="text" id="username">
+            <label for="password">Password</label>
+            <input type="password" id="password">
+            <button class="login-submit">Login</button>
+        </div>
+        <div class="register-body">
+            <label for="regi-username">Username</label>
+            <input type="text" id="regi-username">
+            <label for="regi-password">Password</label>
+            <input type="password" id="regi-password">
+            <label for="confirm-pw">Confirm Password</label>
+            <input type="password" id="confirm-password">
+            <button class="register-submit">Register</button>
+        </div>
+    </div>
     <section class="product-detail">
         <div class="product-thumbnails">
             <img src="https://via.placeholder.com/100x100?text=Thumb+1" class="active">
         </div>
         <div class="product-main-image">
             <!-- <button class="arrow arrow-left">❮</button> -->
-            <img src="Images/product1.jpg" alt="Product">
+            <img src="" alt="Product">
             <!-- <button class="arrow arrow-right">❯</button> -->
         </div>
         <div class="product-info">
@@ -70,7 +106,7 @@
                 <span>1</span>
                 <button>+</button>
             </div>
-            <button class="add-to-bag">Add to bag</button>
+            <button class="add-to-bag">Add to cart</button>
             <div class="extra-info">
                 <div>🚚 Fast Delivery: From 1-2 days</div>
                 <div>📞 Support hotline: (+855) 089 997 916</div>

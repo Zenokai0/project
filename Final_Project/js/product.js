@@ -48,9 +48,35 @@ async function getDetail() {
         });
     });
 
+    const user_id = localStorage.getItem('user_id')
+    if(user_id){
+
+        //add to cart button
+        document.querySelector('.add-to-bag').addEventListener('click', () => {
+            fetch('http://localhost:3000/add-to-cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({user_id: user_id, product_id: selectedProductId})
+            }).then(res => res.json())
+            .then(data => console.log(data));
+        })
+    }
 
 }
 getDetail();
+
+document.addEventListener('DOMContentLoaded', () => {
+    //if theres user_id, user is already logged in
+    if (localStorage.getItem('user_id')) {
+        document.querySelector('.login').style.display = 'none';
+        document.querySelector('.register').style.display = 'none'
+        document.querySelector('.account-btn').style.display = 'block'
+    }
+})
+
+
 // Update the page with selected product data
 
 // Update thumbnails (use provided thumbnails or fallback to main image)
@@ -110,3 +136,118 @@ quantityPlus.addEventListener('click', () => {
     quantity++;
     quantityDisplay.textContent = quantity;
 });
+
+//login signup stuff
+const popup_bg = document.querySelector('.popup-bg');
+const popup = document.querySelector('.popup');
+
+const login_nav = document.querySelector('.nav-login');
+const reg_nav = document.querySelector('.nav-reg');
+
+const login_body = document.querySelector('.login-body');
+const reg_body = document.querySelector('.register-body');
+document.querySelector('.menu-right').addEventListener('click', e => {
+
+    if (e.target.innerHTML == 'Login') {
+        popup_bg.style.display = 'block';
+        popup.style.display = 'grid';
+        login_nav.classList.add('nav-active');
+        reg_nav.classList.remove('nav-active');
+        login_body.classList.remove('hide')
+        reg_body.classList.add('hide');
+    } else if (e.target.innerHTML == 'Register') {
+        popup_bg.style.display = 'block';
+        popup.style.display = 'grid';
+        login_nav.classList.remove('nav-active');
+        reg_nav.classList.add('nav-active');
+        login_body.classList.add('hide')
+        reg_body.classList.remove('hide')
+    }
+})
+document.querySelector('.popup-nav').addEventListener('click', e => {
+    if (e.target.innerHTML == 'Login') {
+        login_nav.classList.add('nav-active');
+        reg_nav.classList.remove('nav-active');
+        login_body.classList.remove('hide')
+        reg_body.classList.add('hide');
+    } else if (e.target.innerHTML == 'Register') {
+        login_nav.classList.remove('nav-active');
+        reg_nav.classList.add('nav-active');
+        login_body.classList.add('hide')
+        reg_body.classList.remove('hide')
+    }
+})
+document.querySelector('.close').addEventListener('click', () => {
+    popup_bg.style.display = 'none';
+    popup.style.display = 'none'
+})
+//login register submission
+document.querySelector('.login-submit').addEventListener('click', () => {
+    const username = document.querySelector('#username');
+    const password = document.querySelector('#password');
+
+    if (username.value != '' && password.value != '') {
+        console.log('yeh')
+        fetch('http://localhost:3000/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: username.value, password: password.value })
+        }).then(res => res.json())
+            .then(data => {
+                if (data[0].user_id != null) {
+                    console.log(data)
+                    localStorage.setItem('user_id', data[0].user_id);
+                    console.log(localStorage.getItem('user_id'));
+                    document.querySelector('.login').style.display = 'none';
+                    document.querySelector('.register').style.display = 'none'
+                    document.querySelector('.account-btn').style.display = 'block'
+
+                    popup_bg.style.display = 'none';
+                    popup.style.display = 'none'
+                }
+            });
+    } else {
+        console.log('nah')
+    }
+
+})
+document.querySelector('.register-submit').addEventListener('click', () => {
+    const username = document.querySelector('#regi-username');
+    const password = document.querySelector('#regi-password')
+    const confirm_pw = document.querySelector("#confirm-password");
+
+    if (username.value != '' && password.value != '' && confirm_pw.value != '') {
+        if (password.value == confirm_pw.value) {
+            fetch('http://localhost:3000/signup', {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: username.value, password: password.value })
+            }).then(res => res.json())
+                .then(data => {
+                    if (data.msg == 'registered') {
+                        login_nav.classList.add('nav-active');
+                        reg_nav.classList.remove('nav-active');
+                        login_body.classList.remove('hide')
+                        reg_body.classList.add('hide');
+                    }
+                })
+        } else {
+            console.log('pw not match')
+        }
+    } else {
+        console.log('nah')
+    }
+})
+document.querySelector('.account-btn').addEventListener('click', () => {
+    document.querySelector('.profile-dropdown').classList.toggle('dropdown-active');
+});
+
+document.querySelector('.logout').addEventListener('click', () => {
+    localStorage.removeItem('user_id')
+    document.querySelector('.profile-dropdown').classList.remove('dropdown-active');
+    window.location.reload();
+})

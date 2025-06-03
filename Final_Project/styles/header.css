@@ -18,7 +18,7 @@ header {
     width: 100vw;
     padding: 0.5rem 2rem;
     top: 0;
-    z-index: 1000;
+    z-index: 9;
 }
 
 .logo h1 {
@@ -259,4 +259,25 @@ header {
     .logo h1 {
         font-size: 20px;
     }
+}
+
+.profile-dropdown{
+    list-style: none;
+    position: absolute;
+    right: 20px;
+    top: 60px;
+    background-color: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    display: none;
+}
+.profile-dropdown li{
+    padding: 10px 25px 10px 10px;
+}
+.profile-dropdown li:nth-child(2):hover{
+    background-color: #ffffff;
+    cursor: pointer;
+}
+.dropdown-active{
+    display: block;
 }

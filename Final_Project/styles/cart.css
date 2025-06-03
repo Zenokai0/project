@@ -1,0 +1,233 @@
+
+/* login/signup popup */
+html{
+    overflow-x: hidden;
+    position: relative;
+    height: 100vh;
+}
+.popup-bg{
+    position: absolute;
+    z-index: 10;
+    background-color: black;
+    opacity: 0.7;
+    width: 100vw;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    margin-top: 0;
+    display: none;
+}
+.popup{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 400px;
+    height: 70vh;
+    margin: auto auto;
+    z-index: 10;
+    background-color: white;
+    padding: 20px;
+    grid-template-rows: 30px 50px;
+    border-radius: 10px;
+    display: none;
+}
+.login-body, .register-body{
+    display: grid;
+    margin-top: 20px;
+}
+.login-body{
+    grid-template-rows: 30px 50px 30px 50px 70px;
+}
+.register-body{
+    grid-template-rows: 30px 50px 30px 50px 30px 50px 70px;
+}
+.hide{
+    display: none;
+}
+
+.login-body input,
+.register-body input{
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+}
+.register-body button,
+.login-body button{
+    margin-top: 20px;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+}
+.close{
+    justify-self: end;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+.popup-nav{
+    display: flex;
+    gap: 20px;
+    border-bottom: 1px solid black;
+}
+.popup-nav-button{
+    border:none;
+    background-color: transparent;
+    font-size: 18px;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+.nav-active{
+    border-bottom: 2px solid black;
+    font-weight: bold;
+}
+/* login/signup popup */
+html{
+    overflow-x: hidden;
+    position: relative;
+}
+.popup-bg{
+    position: absolute;
+    z-index: 10;
+    background-color: black;
+    opacity: 0.7;
+    width: 100vw;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    margin-top: 0;
+    display: none;
+}
+.popup{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 400px;
+    height: 70vh;
+    margin: auto auto;
+    z-index: 10;
+    background-color: white;
+    padding: 20px;
+    grid-template-rows: 30px 50px;
+    border-radius: 10px;
+    display: none;
+}
+.login-body, .register-body{
+    display: grid;
+    margin-top: 20px;
+}
+.login-body{
+    grid-template-rows: 30px 50px 30px 50px 70px;
+}
+.register-body{
+    grid-template-rows: 30px 50px 30px 50px 30px 50px 70px;
+}
+.hide{
+    display: none;
+}
+
+.login-body input,
+.register-body input{
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+}
+.register-body button,
+.login-body button{
+    margin-top: 20px;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+}
+.close{
+    justify-self: end;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+.popup-nav{
+    display: flex;
+    gap: 20px;
+    border-bottom: 1px solid black;
+}
+.popup-nav-button{
+    border:none;
+    background-color: transparent;
+    font-size: 18px;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+.nav-active{
+    border-bottom: 2px solid black;
+    font-weight: bold;
+}
+
+.cart-body{
+    height: 85vh;
+    display: grid;
+    gap: 10px;
+    grid-template-rows: 120px;
+    grid-auto-rows: 120px;
+    padding: 20px 0;
+    overflow-y: auto;
+}
+.item{
+    background-color: white;
+    display: grid;
+    grid-template-columns: 100px 1fr 100px;
+    padding: 20px;
+    border-radius: 10px;
+    gap: 10px;
+}
+.item img{
+    width: 100px;
+    height: 80px;
+    border-radius: 10px;
+}
+.item button{
+    border: none;
+    font-size: 20px;
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+}
+.item button:hover{
+    background-color: rgb(255, 71, 71);
+    cursor: pointer;
+}
+.checkout{
+    position: absolute;
+    background-color: black;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.checkout button{
+    border: none;
+    font-size: 20px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: green;
+    color: white;
+}
+.checkout button:hover{
+    cursor: pointer;
+    background-color: rgb(0, 229, 0);
+}

@@ -46,15 +46,46 @@
         </div>
         <div class="menu-right">
             <input type="search" placeholder="Search..." class="search-bar">
-            <button title="Add to Bag" class="cart menu-right-btn" data-count="0">🛍️</button>
-            <a href="#account" title="User Account" class="account-btn">👤</a>
+            <a href="cart.html" title="Add to Bag" class="cart menu-right-btn" data-count="0">🛍️</a>
+            <button class="login">Login</button>
+            <button class="register">Register</button>
+            <a title="User Account" class="account-btn" style="display: none;">👤</a>
+            <div class="profile-dropdown">
+                <li class="username">username</li>
+                <li class="logout">Logout</li>
+            </div>
+            
             <div class="account-menu">
                 <button title="Notifications">🔔</button>
                 <button title="Add to Bag" class="cart" data-count="0">🛍️</button>
             </div>
         </div>
     </header>
-
+    <!-- login popup -->
+    <div class="popup-bg"></div>
+    <div class="popup">
+        <button class="close">X</button>
+        <div class="popup-nav">
+            <button class="popup-nav-button nav-login">Login</button>
+            <button class="popup-nav-button nav-reg">Register</button>
+        </div>
+        <div class="login-body">
+            <label for="username">Username</label>
+            <input type="text" id="username">
+            <label for="password">Password</label>
+            <input type="password" id="password">
+            <button class="login-submit">Login</button>
+        </div>
+        <div class="register-body">
+            <label for="regi-username">Username</label>
+            <input type="text" id="regi-username">
+            <label for="regi-password">Password</label>
+            <input type="password" id="regi-password">
+            <label for="confirm-pw">Confirm Password</label>
+            <input type="password" id="confirm-password">
+            <button class="register-submit">Register</button>
+        </div>
+    </div>
     <section class="hero">
         <div class="carousel">
             <div class="carousel-slide" style="background-image: url('images/Banner-1.jpg');"></div>

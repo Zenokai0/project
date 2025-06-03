@@ -1,6 +1,5 @@
 /* Hero (Carousel) Section */
 .hero {
-    margin-top: 65px;
     position: relative;
     height: 600px;
     overflow: hidden;
@@ -310,55 +309,93 @@
     margin-bottom: 1rem;
 }
 
-/* unuse */
-/* .product-card .quick-view {
+/* login/signup popup */
+html{
+    overflow-x: hidden;
+    position: relative;
+}
+.popup-bg{
     position: absolute;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 0.5rem 1rem;
-    background: #e94560;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.3s;
+    z-index: 10;
+    background-color: black;
+    opacity: 0.7;
+    width: 100vw;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    margin-top: 0;
+    display: none;
 }
-
-.product-card:hover .quick-view {
-    opacity: 1;
-    bottom: 20%;
-}
-
-.product-card .quick-view:hover {
-    background: #ff6b81;
-} */
-
-/* Chat Button */
-/* .chat-button {
+.popup{
     position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background: #e94560;
-    color: white;
-    padding: 1rem 1.5rem;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1rem;
-    font-weight: 500;
-    text-decoration: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    transition: background 0.3s, transform 0.3s;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 400px;
+    height: 70vh;
+    margin: auto auto;
+    z-index: 10;
+    background-color: white;
+    padding: 20px;
+    grid-template-rows: 30px 50px;
+    border-radius: 10px;
+    display: none;
+}
+.login-body, .register-body{
+    display: grid;
+    margin-top: 20px;
+}
+.login-body{
+    grid-template-rows: 30px 50px 30px 50px 70px;
+}
+.register-body{
+    grid-template-rows: 30px 50px 30px 50px 30px 50px 70px;
+}
+.hide{
+    display: none;
 }
 
-.chat-button:hover {
-    background: #ff6b81;
-    transform: scale(1.05);
-} */
+.login-body input,
+.register-body input{
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+}
+.register-body button,
+.login-body button{
+    margin-top: 20px;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+}
+.close{
+    justify-self: end;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+.popup-nav{
+    display: flex;
+    gap: 20px;
+    border-bottom: 1px solid black;
+}
+.popup-nav-button{
+    border:none;
+    background-color: transparent;
+    font-size: 18px;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+.nav-active{
+    border-bottom: 2px solid black;
+    font-weight: bold;
+}
 
 /* Footer Styles */
 footer {
