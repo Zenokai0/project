@@ -269,7 +269,7 @@ document.querySelector('.login-submit').addEventListener('click', () => {
                 if (data[0].user_id != null) {
                     console.log(data)
                     localStorage.setItem('user_id', data[0].user_id);
-                    console.log(localStorage.getItem('user_id'));
+                    localStorage.setItem('username', data[0].username);
                     document.querySelector('.login').style.display = 'none';
                     document.querySelector('.register').style.display = 'none'
                     document.querySelector('.account-btn').style.display = 'block'

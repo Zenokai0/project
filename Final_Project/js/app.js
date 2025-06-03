@@ -5,7 +5,7 @@ const mysql = require('mysql2')
 var con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '010477148',
+    password: '',
     database: 'zando'
 });
 
@@ -18,7 +18,7 @@ const server = http.createServer((req, res) => {
 
     //allow cors
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
 
@@ -59,7 +59,7 @@ const server = http.createServer((req, res) => {
 
     if (req.url.match(/^\/get-user-cart\/([^\/]+)$/)) {
         const user_id = req.url.match(/^\/get-user-cart\/([^\/]+)$/)[1];
-        con.query(`select product_name, price, product_image from products join user_cart using (product_id) where user_id = ${user_id};`, (err, result) => {
+        con.query(`select user_cart_id, product_id, product_name, price, product_image from products join user_cart using (product_id) where user_id = ${user_id};`, (err, result) => {
             res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify(result));
         })
@@ -68,6 +68,35 @@ const server = http.createServer((req, res) => {
     if (req.method == 'OPTIONS') {
         res.end();
         return;
+    }
+
+    if(req.method == 'DELETE'){
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString();
+        })
+        if(req.url == '/remove-from-cart'){
+            req.on('end', () => {
+                var data = JSON.parse(body);
+                con.query(`delete from user_cart where user_cart_id = ${data.user_cart_id} and product_id = ${data.product_id}`, (err, result) => {
+                    res.setHeader('Content-Type', 'application/json');
+                    res.end(JSON.stringify({
+                        success: true
+                    }));
+                })
+            })
+        }
+        if(req.url == '/checkout'){
+            req.on('end', () => {
+                var data = JSON.parse(body);
+                con.query(`delete from user_cart where user_id = ${data.user_id}`, (err, result) => {
+                    res.setHeader('Content-Type', 'application/json');
+                    res.end(JSON.stringify({
+                        success: true
+                    }))
+                })
+            })
+        }
     }
 
     if (req.method == 'POST') {
@@ -108,6 +137,14 @@ const server = http.createServer((req, res) => {
                     res.end(JSON.stringify({
                         msg: 'item added'
                     }))
+                })
+            })
+        } else if(req.url == '/search'){
+            req.on('end', () => {
+                var data = JSON.parse(body);
+                con.query(`select * from products where product_name like '%${data.search}%'`, (err, result) => {
+                    res.setHeader('Content-Type', 'application/json');
+                    res.end(JSON.stringify(result))
                 })
             })
         }
