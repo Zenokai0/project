@@ -117,7 +117,7 @@ header {
     position: relative;
 }
 
-.cart[data-count]:not([data-count="1"])::after {
+.cart[data-count]::after {
     content: attr(data-count);
     position: absolute;
     top: -5px;

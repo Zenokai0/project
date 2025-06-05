@@ -46,10 +46,6 @@ document.querySelector('.hero').addEventListener('mouseleave', () => {
 
 showSlide(currentSlide);
 
-const cartButton = document.querySelector('.cart');
-let cartCount = 0;
-cartButton.setAttribute('data-count', cartCount);
-
 document.querySelectorAll('.quick-view').forEach(button => {
     button.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -117,6 +113,23 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.querySelector('.login').style.display = 'none';
         document.querySelector('.register').style.display = 'none'
         document.querySelector('.account-btn').style.display = 'block'
+        document.querySelector('.username').innerHTML = localStorage.getItem('username');
+
+        const item_count_res = await fetch('http://localhost:3000/item-count', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user_id: localStorage.getItem('user_id') })
+        })
+        const dat = await item_count_res.json();
+
+        if (dat[0].count) {
+            const cartButton = document.querySelector('.cart');
+            let cartCount = dat[0].count;
+
+            cartButton.setAttribute('data-count', cartCount);
+        }
     }
 
     // Account menu toggle for phone
@@ -162,15 +175,12 @@ document.querySelector('.men').addEventListener('click', async (e) => {
     document.querySelector('.req-product').innerHTML = html;
 })
 document.querySelector('.women').addEventListener('click', async (e) => {
-    console.log(e);
-    console.log()
     let html = '';
 
     const response = await fetch(`http://localhost:3000/women/${e.target.innerHTML}`)
     const data = await response.json();
     data.forEach((d, i) => {
         const product_name = JSON.stringify(d.product_name)
-        console.log(product_name)
         html += `
                 <div class="product-card"
                     onclick="getDetail(${d.product_id})">    
@@ -200,8 +210,7 @@ document.querySelector('.accessories').addEventListener('click', async (e) => {
 //search function
 const searchbar = document.querySelector('.search-bar');
 searchbar.addEventListener('keydown', (e) => {
-    console.log(e.key == 'Enter');
-    if(searchbar.value != '' && e.key == 'Enter'){
+    if (searchbar.value != '' && e.key == 'Enter') {
         localStorage.setItem('search', searchbar.value);
         window.location.href = 'search.html'
     }
@@ -257,7 +266,6 @@ document.querySelector('.login-submit').addEventListener('click', () => {
     const password = document.querySelector('#password');
 
     if (username.value != '' && password.value != '') {
-        console.log('yeh')
         fetch('http://localhost:3000/login', {
             method: 'POST',
             headers: {
@@ -267,7 +275,6 @@ document.querySelector('.login-submit').addEventListener('click', () => {
         }).then(res => res.json())
             .then(data => {
                 if (data[0].user_id != null) {
-                    console.log(data)
                     localStorage.setItem('user_id', data[0].user_id);
                     localStorage.setItem('username', data[0].username);
                     document.querySelector('.login').style.display = 'none';
@@ -276,6 +283,8 @@ document.querySelector('.login-submit').addEventListener('click', () => {
 
                     popup_bg.style.display = 'none';
                     popup.style.display = 'none'
+
+                    window.location.reload();
                 }
             });
     } else {

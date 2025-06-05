@@ -1,5 +1,3 @@
-console.log(localStorage.getItem('search'))
-
 document.addEventListener('DOMContentLoaded', async () => {
     //if theres user_id, user is already logged in
     if (localStorage.getItem('user_id')) {
@@ -7,6 +5,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.querySelector('.register').style.display = 'none'
         document.querySelector('.account-btn').style.display = 'block'
         document.querySelector('.username').innerHTML = localStorage.getItem('username');
+
+        const item_count_res = await fetch('http://localhost:3000/item-count', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user_id: localStorage.getItem('user_id') })
+        })
+        const dat = await item_count_res.json();
+
+        if (dat[0].count) {
+            const cartButton = document.querySelector('.cart');
+            let cartCount = dat[0].count;
+
+            cartButton.setAttribute('data-count', cartCount);
+        }
     }
 
     var search = localStorage.getItem('search')
@@ -44,7 +58,6 @@ function getDetail(product_id) {
 //search function
 const searchbar = document.querySelector('.search-bar');
 searchbar.addEventListener('keydown', (e) => {
-    console.log(e.key == 'Enter');
     var search = localStorage.getItem('search')
     if (searchbar.value != '' && e.key == 'Enter') {
         localStorage.setItem('search', searchbar.value);
@@ -126,7 +139,6 @@ document.querySelector('.login-submit').addEventListener('click', () => {
     const password = document.querySelector('#password');
 
     if (username.value != '' && password.value != '') {
-        console.log('yeh')
         fetch('http://localhost:3000/login', {
             method: 'POST',
             headers: {
@@ -136,7 +148,6 @@ document.querySelector('.login-submit').addEventListener('click', () => {
         }).then(res => res.json())
             .then(data => {
                 if (data[0].user_id != null) {
-                    console.log(data)
                     localStorage.setItem('user_id', data[0].user_id);
                     localStorage.setItem('username', data[0].username);
                     document.querySelector('.login').style.display = 'none';

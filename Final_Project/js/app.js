@@ -5,7 +5,7 @@ const mysql = require('mysql2')
 var con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '',
+    password: '010477148',
     database: 'zando'
 });
 
@@ -135,7 +135,8 @@ const server = http.createServer((req, res) => {
                 con.query(`insert into user_cart(user_id, product_id) values('${data.user_id}', '${data.product_id}')`, (err, result) => {
                     res.setHeader('Content-Type', 'application/json');
                     res.end(JSON.stringify({
-                        msg: 'item added'
+                        msg: 'item added',
+                        success: true,
                     }))
                 })
             })
@@ -145,6 +146,14 @@ const server = http.createServer((req, res) => {
                 con.query(`select * from products where product_name like '%${data.search}%'`, (err, result) => {
                     res.setHeader('Content-Type', 'application/json');
                     res.end(JSON.stringify(result))
+                })
+            })
+        } else if(req.url == '/item-count'){
+            req.on('end', () => {
+                var data = JSON.parse(body);
+                con.query(`select count(user_id) as 'count' from user_cart where user_id = ${data.user_id}`, (err, result) => {
+                    res.setHeader('Content-Type', 'application/json');
+                    res.end(JSON.stringify(result));
                 })
             })
         }
