@@ -2,11 +2,8 @@
 const selectedProductId = localStorage.getItem('selectedProductId');
 //product id and fetch from db
 async function getDetail() {
-    console.log(selectedProductId)
     const response = await fetch(`http://localhost:3000/get-details/${selectedProductId}`);
     const data = await response.json();
-    console.log('hello');
-    console.log(data[0])
 
     document.querySelector('.product-info h2').textContent = data[0].product_name;
     document.querySelector('.price .original').textContent = data[0].price;
@@ -49,7 +46,7 @@ async function getDetail() {
     });
 
     const user_id = localStorage.getItem('user_id')
-    if(user_id){
+    if (user_id) {
 
         //add to cart button
         document.querySelector('.add-to-bag').addEventListener('click', () => {
@@ -58,25 +55,57 @@ async function getDetail() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({user_id: user_id, product_id: selectedProductId})
+                body: JSON.stringify({ user_id: user_id, product_id: selectedProductId })
             }).then(res => res.json())
-            .then(data => console.log(data));
+                .then(data => {
+                    if (data.success) {
+                        //cart item count
+                        const cartButton = document.querySelector('.cart');
+                        let cartCount = Number(cartButton.getAttribute('data-count')) + 1;
+
+                        cartButton.setAttribute('data-count', cartCount);
+                    }
+                });
         })
     }
 
 }
 getDetail();
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     //if theres user_id, user is already logged in
     if (localStorage.getItem('user_id')) {
         document.querySelector('.login').style.display = 'none';
         document.querySelector('.register').style.display = 'none'
         document.querySelector('.account-btn').style.display = 'block'
+        document.querySelector('.username').innerHTML = localStorage.getItem('username');
+
+        const item_count_res = await fetch('http://localhost:3000/item-count', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user_id: localStorage.getItem('user_id') })
+        })
+        const dat = await item_count_res.json();
+
+        if (dat[0].count) {
+            const cartButton = document.querySelector('.cart');
+            let cartCount = dat[0].count;
+
+            cartButton.setAttribute('data-count', cartCount);
+        }
     }
 })
 
-
+//search function
+const searchbar = document.querySelector('.search-bar');
+searchbar.addEventListener('keydown', (e) => {
+    if (searchbar.value != '' && e.key == 'Enter') {
+        localStorage.setItem('search', searchbar.value);
+        window.location.href = 'search.html'
+    }
+})
 // Update the page with selected product data
 
 // Update thumbnails (use provided thumbnails or fallback to main image)
@@ -187,7 +216,6 @@ document.querySelector('.login-submit').addEventListener('click', () => {
     const password = document.querySelector('#password');
 
     if (username.value != '' && password.value != '') {
-        console.log('yeh')
         fetch('http://localhost:3000/login', {
             method: 'POST',
             headers: {
@@ -197,7 +225,6 @@ document.querySelector('.login-submit').addEventListener('click', () => {
         }).then(res => res.json())
             .then(data => {
                 if (data[0].user_id != null) {
-                    console.log(data)
                     localStorage.setItem('user_id', data[0].user_id);
                     localStorage.setItem('username', data[0].username);
                     document.querySelector('.login').style.display = 'none';
@@ -205,7 +232,9 @@ document.querySelector('.login-submit').addEventListener('click', () => {
                     document.querySelector('.account-btn').style.display = 'block'
 
                     popup_bg.style.display = 'none';
-                    popup.style.display = 'none'
+                    popup.style.display = 'none';
+
+                    window.location.reload();
                 }
             });
     } else {
