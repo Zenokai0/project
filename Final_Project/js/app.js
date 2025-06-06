@@ -3,9 +3,9 @@ const http = require('http');
 const mysql = require('mysql2')
 
 var con = mysql.createConnection({
-    host: 'localhost',
+    host: '127.0.0.1',
     user: 'root',
-    password: '',
+    password: '010477148',
     database: 'zando'
 });
 
