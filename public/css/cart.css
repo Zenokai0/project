@@ -1,0 +1,59 @@
+html{
+    height: 100vh;
+}
+.cart-body{
+    height: 85vh;
+    display: grid;
+    gap: 10px;
+    grid-template-rows: 120px;
+    grid-auto-rows: 120px;
+    padding: 20px 0;
+    overflow-y: auto;
+}
+.item{
+    background-color: white;
+    display: grid;
+    grid-template-columns: 100px 1fr 100px;
+    padding: 20px;
+    border-radius: 10px;
+    gap: 10px;
+}
+.item img{
+    width: 100px;
+    height: 80px;
+    border-radius: 10px;
+}
+.item button{
+    border: none;
+    font-size: 20px;
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+}
+.item button:hover{
+    background-color: rgb(255, 71, 71);
+    cursor: pointer;
+}
+.checkout{
+    position: absolute;
+    background-color: black;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.checkout button{
+    border: none;
+    font-size: 20px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: green;
+    color: white;
+}
+.checkout button:hover{
+    cursor: pointer;
+    background-color: rgb(0, 229, 0);
+}
